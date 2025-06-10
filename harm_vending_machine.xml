@@ -1,0 +1,27 @@
+<HARM>
+  <context>vending_machine</context>
+  <Signals>
+    <Signal>clk</Signal>
+    <Signal>rst</Signal>
+    <Signal>coin_in</Signal>
+    <Signal>button_in</Signal>
+    <Signal>beverage_out</Signal>
+    <Signal>change_out</Signal>
+    <Signal>credit</Signal>
+    <Signal>state</Signal>
+  </Signals>
+  <Templates>
+    <Template>G((coin_in == 10) -> X(credit > Y(credit)))</Template>
+    <Template>G((coin_in == 20) -> X(credit > Y(credit)))</Template>
+    <Template>G((coin_in == 50) -> X(credit > Y(credit)))</Template>
+    <Template>G((coin_in == 100) -> X(credit > Y(credit)))</Template>
+    <Template>G((coin_in == 200) -> X(credit > Y(credit)))</Template>
+    <Template>G(((button_in == 1) &amp;&amp; (credit >= 30)) -> F(beverage_out == 1))</Template>
+    <Template>G(((button_in == 2) &amp;&amp; (credit >= 50)) -> F(beverage_out == 2))</Template>
+    <Template>G((rst == 1) -> (credit == 0 &amp;&amp; beverage_out == 0 &amp;&amp; change_out == 0))</Template>
+    <Template>G(((button_in == 1) &amp;&amp; (credit < 30)) -> (beverage_out == 0))</Template>
+    <Template>G(((button_in == 2) &amp;&amp; (credit < 50)) -> (beverage_out == 0))</Template>
+    <Template>G(((state == 1) || (state == 2)) -> (coin_in == 0 &amp;&amp; button_in == 0))</Template>
+    <Template>G(((credit < 30) &amp;&amp; (state == 0)) -> F(change_out == credit))</Template>
+  </Templates>
+</HARM>
