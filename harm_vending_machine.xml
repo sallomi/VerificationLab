@@ -1,0 +1,37 @@
+<harm>
+  <context name="vending_machine">
+    <!-- Define key signal conditions as propositions -->
+    <prop exp="coin_in == 10" loc="dt"/>
+    <prop exp="coin_in == 20" loc="dt"/>
+    <prop exp="coin_in == 50" loc="dt"/>
+    <prop exp="coin_in == 100" loc="dt"/>
+    <prop exp="coin_in == 200" loc="dt"/>
+    <prop exp="button_in == 1" loc="dt"/>
+    <prop exp="button_in == 2" loc="dt"/>
+    <prop exp="credit >= 30" loc="dt"/>
+    <prop exp="credit >= 50" loc="dt"/>
+    <prop exp="rst == 1" loc="dt"/>
+    <prop exp="beverage_out == 1" loc="dt"/>
+    <prop exp="beverage_out == 2" loc="dt"/>
+    <prop exp="change_out == credit" loc="dt"/>
+    <prop exp="state == 1" loc="dt"/>
+    <prop exp="state == 2" loc="dt"/>
+    <prop exp="credit < 30" loc="dt"/>
+    <prop exp="button_in == 0" loc="dt"/>
+    <prop exp="coin_in == 0" loc="dt"/>
+    
+    <!-- Templates (LTL formulas with the above props, or directly as expressions) -->
+    <template exp="G((coin_in == 10) -> X(credit > credit[-1]))"/>
+    <template exp="G((coin_in == 20) -> X(credit > credit[-1]))"/>
+    <template exp="G((coin_in == 50) -> X(credit > credit[-1]))"/>
+    <template exp="G((coin_in == 100) -> X(credit > credit[-1]))"/>
+    <template exp="G((coin_in == 200) -> X(credit > credit[-1]))"/>
+    <template exp="G(((button_in == 1) && (credit >= 30)) -> F(beverage_out == 1))"/>
+    <template exp="G(((button_in == 2) && (credit >= 50)) -> F(beverage_out == 2))"/>
+    <template exp="G((rst == 1) -> (credit == 0 && beverage_out == 0 && change_out == 0))"/>
+    <template exp="G(((button_in == 1) && (credit < 30)) -> (beverage_out == 0))"/>
+    <template exp="G(((button_in == 2) && (credit < 50)) -> (beverage_out == 0))"/>
+    <template exp="G(((state == 1) || (state == 2)) -> (coin_in == 0 && button_in == 0))"/>
+    <template exp="G(((credit < 30) && (state == 0)) -> F(change_out == credit))"/>
+  </context>
+</harm>
