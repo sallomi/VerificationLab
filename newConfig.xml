@@ -1,0 +1,25 @@
+<harm>
+	<context name="default">
+
+		<numeric clustering="K,10Max,0.01WCSS,><,==" exp="tb_vending_machine_rand::state" loc="c,dt"/>
+		<numeric clustering="K,10Max,0.01WCSS,><,==" exp="tb_vending_machine_rand::credit" loc="c,dt"/>
+		<numeric clustering="K,10Max,0.01WCSS,><,==" exp="tb_vending_machine_rand::beverage_out" loc="c,dt"/>
+		<numeric clustering="K,10Max,0.01WCSS,><,==" exp="tb_vending_machine_rand::change_out" loc="c,dt"/>
+		<numeric clustering="K,10Max,0.01WCSS,><,==" exp="tb_vending_machine_rand::button_in" loc="c,dt"/>
+		<numeric clustering="K,10Max,0.01WCSS,><,==" exp="tb_vending_machine_rand::coin_in" loc="c,dt"/>
+		<prop exp="tb_vending_machine_rand::rst" loc="c,dt"/>
+		<prop exp="tb_vending_machine_rand::clk" loc="c,dt"/>
+
+
+
+		<template dtLimits="5D,3W,15A,-0.1E,U" exp="G({..#1&..}|-> P0)" /> 
+
+
+
+		<sort name="causality" exp="1-afct/traceLength"/>
+		<sort name="frequency" exp="atct/traceLength"/>
+	</context>
+</harm>
+
+
+
